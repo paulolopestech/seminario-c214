@@ -1,0 +1,30 @@
+name: CI/CD Robot Framework
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy_logs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+        working-directory: ./unit-tests/tests
+
+      - name: Executar testes do Robot Framework
+        run: |
+          robot -d ./logs ./unit-tests/tests
+        working-directory: ./unit-tests/tests
+
+      - name: Fazer deploy dos logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: ./logs
