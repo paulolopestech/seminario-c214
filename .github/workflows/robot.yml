@@ -21,7 +21,7 @@ jobs:
       - name: Executar testes do Robot Framework
         run: |
           robot -d ./logs ./unit-tests/tests/
-        working-directory: ./unit-tests/tests/
+        working-directory: ./unit-tests/tests/*.robot
 
       - name: Fazer deploy dos logs
         uses: actions/upload-artifact@v2
