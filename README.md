@@ -1,6 +1,6 @@
 # 🐍🤖 Seminário
 
-API para coleta e processamento de dados.
+API para geração de gráficos para análise de dados.
 
 ## 🟦 TESTES:
 [![CI class](https://github.com/NathanAtaliba/seminario-c214/actions/workflows/robot.yml/badge.svg)](https://github.com/NathanAtaliba/seminario-c214/actions/workflows/robot.yml)
