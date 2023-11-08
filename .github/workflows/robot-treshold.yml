@@ -24,7 +24,8 @@ jobs:
 
       - name: Run Robot Framework tests
         run: |
-          coverage run -m robot /unit-tests/tests/example.robot
+          pwd
+          coverage run -m robot ./unit-tests/tests/example.robot
 
       - name: Calculate code coverage
         run: |
