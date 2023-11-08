@@ -1,3 +1,5 @@
 .pyvenv
 src/buffer/*
 *__pycache__
+reports
+.coverage
