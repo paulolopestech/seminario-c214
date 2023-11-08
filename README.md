@@ -1,0 +1,1 @@
+![unit-tests](https://github.com/paulolopestech/seminario-c214/actions/workflows/robot-test.yml/badge.svg)
