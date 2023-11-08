@@ -1,0 +1,38 @@
+name: Robot Framework Tests and Code Coverage
+
+on:
+  push:
+    branches:
+      - PHLJ-coverage-treshold
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Robot Framework tests
+        run: |
+          coverage run -m robot /unit-tests/tests/example.robot
+
+      - name: Calculate code coverage
+        run: |
+          coverage report -m
+          coverage xml -i
+
+      - name: Check code coverage against thresholds
+        run: |
+          pip install coverage-threshold
+          coverage-threshold check -c coverage-threshold.yml
+
