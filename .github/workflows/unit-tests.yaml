@@ -1,0 +1,46 @@
+name: Unit Tests
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Update codecov for unit tests
+        uses: codecov/codecov-action@v2
+        with:
+          flags: unit
+          file: coverage.xml
+
+      - name: Test with Robot Framework and coverage
+        run: |
+          coverage erase
+          coverage run --branch --source src/ -m robot --loglevel trace:info --exclude skip --pythonpath src --outputdir ./reports --consolecolors ansi src/test/
+      
+      - name: Acceptance tests coverage
+        run: |
+          coverage report --fail-under=95
+          coverage xml
+      
+      - name: Update codecov for acceptance tests
+        uses: codecov/codecov-action@v2
+        with:
+          flags: acceptance
+          file: coverage.xml
+
+      - name: Archive Robot Framework Tests Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: rf-tests-report-${{ matrix.os }}-${{ matrix.python-version }}
+          path: ./tests-report
