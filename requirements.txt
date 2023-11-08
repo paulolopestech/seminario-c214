@@ -2,6 +2,8 @@ Flask==3.0.0
 seaborn==0.13.0
 matplotlib==3.8.1
 robotframework==3.2.2
+coverage==5.5
+coverage-threshold==0.4.4
 robotframework-requests==0.7.2
 robotframework-sshlibrary==3.7
 robotframework-seleniumlibrary==5.1.3
