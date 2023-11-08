@@ -8,10 +8,13 @@ class Plotter:
         pass
 
     def plot(self, data):
-        
+
         os.makedirs(os.path.join("src", "buffer"), exist_ok=True)
         src_path = os.path.join("buffer", "data_plot.png")
         image_path = os.path.join("src", src_path)
+
+        sb.set_style("whitegrid")
+        plt.figure(figsize=(10, 5))
 
         if data == -1:
             plt.plot(1, label='ERRO')
