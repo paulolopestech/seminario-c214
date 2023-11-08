@@ -1,25 +1,26 @@
 import matplotlib.pyplot as plt
 import seaborn as sb
+import os
 
 class Plotter:
     
-    def init(self):        
+    def __init__(self):        
         pass
 
     def plot(self, data):
-        output_directory = './buffer/'
-        if data  == -1:
-            plt.legend(loc='center')
+        
+        os.makedirs(os.path.join("src", "buffer"), exist_ok=True)
+        src_path = os.path.join("buffer", "data_plot.png")
+        image_path = os.path.join("src", src_path)
+
+        if data == -1:
             plt.plot(1, label='ERRO')
-            plt.savefig('./buffer/erro_plot.png', format='png')
-            output_file = output_directory + 'data_plot.png'
+            plt.legend(loc='center')
+            plt.savefig(image_path, format='png')
             plt.close()
         else:
-            plt.legend(loc='center')
             plt.plot(data)
-            output_file = 'buffer/data_plot.png'
-            plt.savefig('./buffer/data_plot.png', format='png')
-            output_file = output_directory + 'data_plot.png'
+            plt.savefig(image_path, format='png')
             plt.close()
 
-        return output_file
+        return src_path
