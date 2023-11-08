@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, request
 
 class WebServer:
     
@@ -18,7 +18,18 @@ class WebServer:
         @param route This is the URL rule as a string.
         @param plotter This is an object that has a plot method which returns the path to the image file to be sent as a response.
         """
-        self.__Flask.add_url_rule(route, route, lambda: send_file(plotter.plot()))
+        def route_handler():
+            data = request.args.get('data', -1)
+            
+            data = data.strip('[').strip(']').split(',')
+            data = [float(x) for x in data]
+            if not all([True if str(x).isnumeric() else False for x in data]):
+                data = -1
+
+            plot_path = plotter.plot(data)
+            return send_file(plot_path)
+        
+        self.__Flask.add_url_rule(route, route, route_handler)
         
     def run_server(self):
         """
