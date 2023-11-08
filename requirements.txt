@@ -1,0 +1,6 @@
+Flask==3.0.0
+
+robotframework==3.2.2
+robotframework-requests==0.7.2
+robotframework-sshlibrary==3.7
+robotframework-seleniumlibrary==5.1.3
