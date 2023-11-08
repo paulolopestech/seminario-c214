@@ -14,13 +14,6 @@ API para geração de gráficos para análise de dados.
 
 - Pode aceitar dados em formatos JSON
 - Deve validar os dados de entrada automaticamente
-- Pode gerar diferentes tipos de gráficos, como linha, barra, pizza, dispersão ou histograma, com base no argumento de URL `type`
-- Pode personalizar a aparência do gráfico, como cor, tamanho, título, rótulos, legenda ou grade, com base nos argumentos de URL `color`, `size`, `title`, `labels`, `legend` ou `grid`
-- Pode aplicar diferentes funções estatísticas aos dados, como média, mediana, moda, desvio padrão ou correlação, com base no argumento de URL `stat`
-- Pode filtrar os dados com base em certos critérios, como intervalo, categoria ou condição, com base no argumento de URL `filter`
-- Pode ordenar os dados com base em uma coluna ou valor especificado, com base no argumento de URL `sort`
-- Pode adicionar anotações ou comentários ao gráfico, como texto, setas ou formas, com base no argumento de URL `annotate`
-- Pode especificar o formato do gráfico como PNG, JPEG ou SVG, com base no argumento de URL `format`
 - Deve retornar uma página estática contendo o gráfico em formato de imagem
 
 ## 👥 Equipe
