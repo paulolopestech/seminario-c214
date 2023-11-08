@@ -20,12 +20,12 @@ class WebServer:
         """
         def route_handler():
             data = request.args.get('data', -1)
-            
-            data = data.strip('[').strip(']').split(',')
-            data = [float(x) for x in data]
-            if not all([True if str(x).isnumeric() else False for x in data]):
+            try:
+                data = data.strip('[').strip(']').split(',')
+                data = [float(x) for x in data]
+            except:
                 data = -1
-
+            
             plot_path = plotter.plot(data)
             return send_file(plot_path)
         

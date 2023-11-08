@@ -6,7 +6,8 @@ class Plotter:
     def _init_(self):        
         pass
 
-    def plot(self, data):
+    @staticmethod
+    def plot(data):
         output_directory = './buffer'
         if data  == -1:
             plt.legend(loc='center')
