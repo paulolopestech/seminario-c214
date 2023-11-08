@@ -3,7 +3,7 @@
 API para geração de gráficos para análise de dados.
 
 ## 🟦 TESTES:
-![unit-tests](https://github.com/paulolopestech/seminario-c214/actions/workflows/unit-test.yml/badge.svg)
+![unit-tests](https://github.com/paulolopestech/seminario-c214/actions/workflows/unit-tests.yaml/badge.svg)
 
 ## 🛠️ Tecnologias utilizadas
 
