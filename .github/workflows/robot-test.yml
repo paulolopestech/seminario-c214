@@ -1,0 +1,56 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Test
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        python-version: [ 2.7, 3.7, 3.8, 3.x ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Update codecov for unit tests
+        uses: codecov/codecov-action@v2
+        with:
+          flags: unit
+          file: coverage.xml
+
+      - name: Test with Robot Framework and coverage
+        run: |
+          coverage erase
+          coverage run --branch --source unit-tests/ -m robot --loglevel trace:info --exclude skip --pythonpath src --outputdir ./tests-report --consolecolors ansi unit-tests/tests/
+      
+      - name: Acceptance tests coverage
+        run: |
+          coverage report --fail-under=95
+          coverage xml
+      
+      - name: Update codecov for acceptance tests
+        uses: codecov/codecov-action@v2
+        with:
+          flags: acceptance
+          file: coverage.xml
+
+      - name: Archive Robot Framework Tests Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: rf-tests-report-${{ matrix.os }}-${{ matrix.python-version }}
+          path: ./tests-report
