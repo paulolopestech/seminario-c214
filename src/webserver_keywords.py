@@ -1,11 +1,19 @@
 from WebServer import WebServer
 # from flask import Flask, send_file, request
 
-def GetWebServerInstance(httpRequest, Flask):
-    return WebServer(httpRequest, Flask) # retorna a instancia da classe webserver na porta 8080 e objeto de requisição none
+def GetWebServerInstance(Flask, sendFile, request, plotter):
+    return WebServer(Flask, sendFile, request, plotter) # retorna a instancia da classe webserver na porta 8080 e objeto de requisição none
 
 def GetFlaskInstanceFromWebServer(webserver: WebServer):
     return webserver.getFlask() #recebe uma instancia do webserver como argumento e retorna a instancia do flask associada a ela
+
+def ExecuteWebServerRouterHandler(webserver: WebServer):
+
+    return
+
+class PlotterMock:
+    def plot():
+        return '1'
 
 class FlaskMock:
     def __init__(self) -> None:
@@ -30,11 +38,17 @@ class MockRequestArgs: # simula os argumentos da requisição, possuindo um mét
             return self.data_value
         return default
 
+def getPlotterMock():
+    return PlotterMock()
+
 def requestMock():
     return MockRequestArgs() #retorna a instancia da classe
 
 def mock():
     return 'mock' #retorna a string.
+
+def sendFileMock():
+    return 'send'
 
 
 class MockRequest:

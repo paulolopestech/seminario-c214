@@ -4,14 +4,19 @@ Library        ../../webserver_keywords.py
 
 
 *** Test Cases ***
-Testing WebServer instance
+WebServer Should instance with parameters
     ${flaskMock}=    Get Flask Mock Instance
-    ${flaskRequestMock}=    Request Mock
-    ${instance}=    Get Web Server Instance    ${flaskRequestMock}    ${flaskMock}
+    ${sendFileMock}=    Send File Mock
+    ${plotterMock}=   Get Plotter Mock
+    ${requestMock}=    Request Mock
+    ${instance}=    Get Web Server Instance    ${flaskMock}    ${sendFileMock}    ${requestMock}    ${plotterMock}
     ${parameter}=    Get Flask Instance From Web Server    ${instance}
     Should Be Equal    ${parameter}    ${flaskMock}
 
-Test WebServer Functionality
+WebServer Should Have an active instance
     ${flaskMock}=    Get Flask Mock Instance
-    ${flaskRequestMock}=    Request Mock
-    ${webServerInstance}=    Get Web Server Instance    ${flaskRequestMock}    ${flaskMock}
+    ${sendFileMock}=    Send File Mock
+    ${plotterMock}=   Get Plotter Mock
+    ${requestMock}=    Request Mock
+    ${webServerInstance}=    Get Web Server Instance    ${flaskMock}    ${sendFileMock}    ${requestMock}    ${plotterMock}
+    
