@@ -1,0 +1,42 @@
+name: Deploy and Run Python App on EC2
+
+# on:
+#   workflow_run:
+#     workflows: [Unit Tests]
+#     types:
+#       - completed
+on: [ push, pull_request ]
+
+jobs:
+  deploy_and_run:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+      EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Adjust as needed
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy to EC2
+      run: |
+        echo "Deploying to EC2"
+        echo "$AWS_SSH_PRIVATE_KEY" > key.pem
+        chmod 600 key.pem
+        scp -i key.pem -r * ec2-user@$EC2_INSTANCE_IP:/seminario
+
+    - name: Run Application on EC2
+      run: |
+        echo "Running the Python application"
+        ssh -i key.pem ec2-user@$EC2_INSTANCE_IP "cd /seminario/src && python api.py"
