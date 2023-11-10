@@ -37,3 +37,6 @@ class WebServer:
         @return None.
         """
         self.__Flask.run(debug=False, port=self.__port)
+    
+    def getFlask(self):
+        return self.__Flask
