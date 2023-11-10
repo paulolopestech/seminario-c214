@@ -4,7 +4,7 @@ import os
 
 class Plotter:
 
-    def __init__(self, initialized):
+    def __init__(self, initialized = True):
         """
         @brief This constructor initializes the Plotter object.
         @param initialized Any value to check if the object is initialized. 
