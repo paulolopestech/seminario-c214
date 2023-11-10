@@ -19,24 +19,28 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8  # Adjust as needed
+    # - name: Set up Python
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: 3.8
 
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+    # - name: Install Dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt
 
     - name: Deploy to EC2
       run: |
         echo "Deploying to EC2"
         echo "$AWS_SSH_PRIVATE_KEY" > key.pem
         chmod 400 key.pem
-        scp -i key.pem -r * ubuntu@$EC2_INSTANCE_IP:/
+        ssh -i key.pem ubuntu@$EC2_INSTANCE_IP 
+        git clone git@github.com:paulolopestech/seminario-c214.git 
+        cd ./seminario-c214 
+        pip install -r  requirements.txt 
+        python3 ./src/api.py"
 
-    - name: Run Application on EC2
-      run: |
-        echo "Running the Python application"
-        ssh -i key.pem ubuntu@$EC2_INSTANCE_IP "cd /seminario/src && python api.py"
+    # - name: Run Application on EC2
+    #   run: |
+    #     echo "Running the Python application"
+    #     ssh -i key.pem ec2-user@$EC2_INSTANCE_IP "cd /seminario/src && python api.py"
