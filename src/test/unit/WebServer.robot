@@ -1,5 +1,4 @@
 *** Settings ***
-Library        ../../WebServer.py
 Library        ../../webserver_keywords.py
 
 
