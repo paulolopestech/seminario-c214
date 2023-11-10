@@ -1,26 +1,28 @@
-name: SSH into EC2 and Run Commands
+name: Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [ dev ]
 
 jobs:
-  deploy:
+  Deploy:
+    name: Deploy to EC2
     runs-on: ubuntu-latest
-    env:
-      EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_IP }}
-
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: SSH into EC2 and Run Commands
+      - uses: actions/checkout@v2 
+      - name: Build & Deploy
+        env:
+            PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+            HOSTNAME: ${{secrets.EC2_INSTANCE_IP}}
+      
         run: |
-          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$EC2_INSTANCE_IP 'git clone git@github.com:paulolopestech/seminario-c214.git && cd ./seminario-c214 && pip install -r  requirements.txt && python3 ./src/api.py'
-          # Replace "your-ec2-instance-ip" with the actual IP address of your EC2 instance.
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@${HOSTNAME} '
+              cd /home/ubuntu/ &&
+              r -rf seminario-c214 || true &&
+              git clone git@github.com:paulolopestech/seminario-c214.git &&
+              cd ./seminario-c214 &&
+              pip install -r  requirements.txt &&
+              python3 ./src/api.py
+              '
