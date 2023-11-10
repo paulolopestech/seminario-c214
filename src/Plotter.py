@@ -3,25 +3,25 @@ import seaborn as sb
 import os
 
 class Plotter:    
-    def __init__(self, plotPath = "data_plot.png"):
-        self.plotPath = plotPath        
+    def __init__(self):
+        pass      
 
-    def plot(self, data):
+    def plot(self, data, image_name = "data_plot.png"):
+
         os.makedirs(os.path.join("src", "buffer"), exist_ok=True)
-        src_path = os.path.join("./src/buffer", self.plotPath)
-        image_path = os.path.join(src_path)
+        image_path = os.path.join("src", "buffer", image_name)
+        src_rel_path = os.path.join("buffer", image_name)
 
         sb.set_style("whitegrid")
         plt.figure(figsize=(10, 5))
 
-        if data == -1:
-            plt.plot(1, label='ERRO')
-            plt.legend(loc='center')
-            plt.savefig(image_path, format='png')
-            plt.close()
-        else:
-            plt.plot(data)
-            plt.savefig(image_path, format='png')
-            plt.close()
+        try:
+            all(isinstance(element, float) for element in data)
+        except:
+            raise Exception("data needs to be an array of type float")
+            
+        plt.plot(data)
+        plt.savefig(image_path, format='png')
+        plt.close()
 
-        return src_path
+        return src_rel_path
