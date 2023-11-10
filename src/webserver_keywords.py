@@ -1,7 +1,7 @@
 from WebServer import WebServer
 
-def GetWebServerInstance(flask):
-    return WebServer(flask)
+def GetWebServerInstance(flask, port=8080, request= None):
+    return WebServer(flask, port=8080, request=None)
 
 def GetFlaskInstanceFromWebServer(webserver: WebServer):
     return webserver.getFlask()
@@ -36,3 +36,9 @@ def mock():
     return 'mock'
 
 
+class MockRequest:
+    def __init__(self, args):
+        self.args = args
+
+    def get(self, key, default=None):
+        return self.args.get(key, default)
