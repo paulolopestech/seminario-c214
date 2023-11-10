@@ -34,11 +34,7 @@ jobs:
         echo "Deploying to EC2"
         echo "$AWS_SSH_PRIVATE_KEY" > key.pem
         chmod 400 key.pem
-        ssh -i key.pem ubuntu@$EC2_INSTANCE_IP 
-        git clone git@github.com:paulolopestech/seminario-c214.git 
-        cd ./seminario-c214 
-        pip install -r  requirements.txt 
-        python3 ./src/api.py"
+        ssh -i key.pem ubuntu@$EC2_INSTANCE_IP "git clone git@github.com:paulolopestech/seminario-c214.git && cd ./seminario-c214 && pip install -r  requirements.txt && python3 ./src/api.py"
 
     # - name: Run Application on EC2
     #   run: |
