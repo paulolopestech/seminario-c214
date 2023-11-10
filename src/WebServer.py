@@ -1,8 +1,8 @@
-from flask import Flask, send_file, request
+from flask import send_file, request
 
 class WebServer:
     
-    def __init__(self, Flask=Flask(__name__), port=8080, httpRequest=request):
+    def __init__(self, httpRequest, Flask):
         """
         @brief This is the constructor for the WebServer class.
         @param Flask This is an instance of the Flask class. By default, it's initialized with the name of the current module.
@@ -10,7 +10,7 @@ class WebServer:
         @return It returns a WebServer object.
         """
         self.__Flask = Flask
-        self.__port = port
+        self.__port = 8080
         self._httpRequest = httpRequest
 
     def route_handler(self, plotter):

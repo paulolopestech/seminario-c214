@@ -1,7 +1,8 @@
 from WebServer import WebServer
+# from flask import Flask, send_file, request
 
-def GetWebServerInstance(flask, port=8080, request= None):
-    return WebServer(flask, port=8080, request=None) # retorna a instancia da classe webserver na porta 8080 e objeto de requisição none
+def GetWebServerInstance(httpRequest, Flask):
+    return WebServer(httpRequest, Flask) # retorna a instancia da classe webserver na porta 8080 e objeto de requisição none
 
 def GetFlaskInstanceFromWebServer(webserver: WebServer):
     return webserver.getFlask() #recebe uma instancia do webserver como argumento e retorna a instancia do flask associada a ela
