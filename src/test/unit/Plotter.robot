@@ -5,7 +5,7 @@ Library         ../../plotter_keywords.py
 *** Variables ***
 ${PLOTINPUT}    [1]
 ${PLOTINPUTERROR}    -1
-${BUFFERPATHRESPONSE}    ./src/buffer/data_plot.png
+${BUFFERPATHRESPONSE}    buffer/data_plot.png
 
 *** Test Cases ***
 
