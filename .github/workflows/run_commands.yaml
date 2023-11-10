@@ -18,7 +18,7 @@ jobs:
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@${HOSTNAME} '
               cd /home/ubuntu/ &&
-              r -rf seminario-c214 || true &&
+              rm -rf ~/seminario-c214 || true &&
               git clone git@github.com:paulolopestech/seminario-c214.git &&
               cd ./seminario-c214 &&
               pip install -r  requirements.txt &&
