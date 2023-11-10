@@ -2,7 +2,7 @@ from flask import Flask, send_file, request
 
 class WebServer:
     
-    def __init__(self, Flask=Flask(__name__), port=8080):
+    def __init__(self, Flask=Flask(__name__), port=8080, httpRequest=request):
         """
         @brief This is the constructor for the WebServer class.
         @param Flask This is an instance of the Flask class. By default, it's initialized with the name of the current module.
@@ -11,6 +11,18 @@ class WebServer:
         """
         self.__Flask = Flask
         self.__port = port
+        self._httpRequest = httpRequest
+
+    def route_handler(self, plotter):
+        data = self._httpRequest.args.get('data', -1)
+        try:
+            data = data.strip('[').strip(']').split(',')
+            data = [float(x) for x in data]
+        except:
+            data = -1
+        
+        plot_path = plotter.plot(data)
+        return send_file(plot_path)
         
     def add_route_execute(self, route, plotter):
         """
@@ -18,18 +30,8 @@ class WebServer:
         @param route This is the URL rule as a string.
         @param plotter This is an object that has a plot method which returns the path to the image file to be sent as a response.
         """
-        def route_handler():
-            data = request.args.get('data', -1)
-            try:
-                data = data.strip('[').strip(']').split(',')
-                data = [float(x) for x in data]
-            except:
-                data = -1
-            
-            plot_path = plotter.plot(data)
-            return send_file(plot_path)
         
-        self.__Flask.add_url_rule(route, route, route_handler)
+        self.__Flask.add_url_rule(route, route, self.route_handler(plotter))
         
     def run_server(self):
         """
