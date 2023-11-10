@@ -1,10 +1,10 @@
 from WebServer import WebServer
 
 def GetWebServerInstance(flask, port=8080, request= None):
-    return WebServer(flask, port=8080, request=None)
+    return WebServer(flask, port=8080, request=None) # retorna a instancia da classe webserver na porta 8080 e objeto de requisição none
 
 def GetFlaskInstanceFromWebServer(webserver: WebServer):
-    return webserver.getFlask()
+    return webserver.getFlask() #recebe uma instancia do webserver como argumento e retorna a instancia do flask associada a ela
 
 class FlaskMock:
     def __init__(self) -> None:
@@ -18,9 +18,9 @@ class FlaskMock:
 
 def GetFlaskMockInstance():
     flaskMock = FlaskMock()
-    return flaskMock
+    return flaskMock # a classe faz uma simulação com os metodos run e add rule com strings especificas e retorna a instancia da classe
 
-class MockRequestArgs:
+class MockRequestArgs: # simula os argumentos da requisição, possuindo um método get.
     def __init__(self, data_value=-1):
         self.data_value = data_value
 
@@ -30,10 +30,10 @@ class MockRequestArgs:
         return default
 
 def requestMock():
-    return MockRequestArgs()
+    return MockRequestArgs() #retorna a instancia da classe
 
 def mock():
-    return 'mock'
+    return 'mock' #retorna a string.
 
 
 class MockRequest:
@@ -42,3 +42,5 @@ class MockRequest:
 
     def get(self, key, default=None):
         return self.args.get(key, default)
+
+    #simula representando uma requisição, com um método get.

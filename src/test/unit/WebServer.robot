@@ -9,3 +9,7 @@ Testing WebServer instance
     ${instance}=    Get Web Server Instance    ${flaskMock}
     ${parameter}=    Get Flask Instance From Web Server    ${instance}
     Should Be Equal    ${parameter}    ${flaskMock}
+
+Test WebServer Functionality
+    ${flaskMock}=    Get Flask Mock Instance
+    ${webServerInstance}=    Get Web Server Instance    ${flaskMock}

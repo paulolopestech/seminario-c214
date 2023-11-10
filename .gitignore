@@ -3,3 +3,5 @@ src/buffer/*
 *__pycache__
 reports
 .coverage
+venv
+*.idea
