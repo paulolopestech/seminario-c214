@@ -8,7 +8,7 @@ class WebServer:
         @return It returns a WebServer object.
         """
         self.__Flask = Flask
-        self.__port = 80
+        self.__port = 8080
         self.__send_file = send_file
         self.__httpRequest = request
         self.__plotter= plotter
