@@ -26,7 +26,7 @@ class WebServer:
                 data = [float(x) for x in data]
             except:
                 data = -1
-            plot_path = self.__plotter.plot(data, 'plot')
+            plot_path = self.__plotter.plot('plot', data)
             return self.__send_file(plot_path)
 
         self.__Flask.add_url_rule(route, route, route_handler)
