@@ -23,6 +23,6 @@ jobs:
               git clone git@github.com:paulolopestech/seminario-c214.git &&
               cd ./seminario-c214 &&
               pip install -r  requirements.txt &&
-              python3 ./src/api.py &&
+              nohup python3 ./src/api.py &&
               exit
               '
