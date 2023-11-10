@@ -2,15 +2,13 @@ import matplotlib.pyplot as plt
 import seaborn as sb
 import os
 
-class Plotter:
-    
-    def __init__(self):        
-        pass
+class Plotter:    
+    def __init__(self, plotPath = "data_plot.png"):
+        self.plotPath = plotPath        
 
     def plot(self, data):
-
         os.makedirs(os.path.join("src", "buffer"), exist_ok=True)
-        src_path = os.path.join("./src/buffer", "data_plot.png")
+        src_path = os.path.join("./src/buffer", self.plotPath)
         image_path = os.path.join(src_path)
 
         sb.set_style("whitegrid")
