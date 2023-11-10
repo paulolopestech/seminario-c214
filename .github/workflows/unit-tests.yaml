@@ -42,5 +42,5 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v1
         with:
-          name: rf-tests-report-${{ matrix.os }}-${{ matrix.python-version }}
-          path: ./tests-report
+          name: rf-tests-report-ubuntu-latest-3.x
+          path: ./reports
