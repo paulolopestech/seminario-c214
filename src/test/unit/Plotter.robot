@@ -9,15 +9,15 @@ ${BUFFERPATHRESPONSE}    buffer/data_plot.png
 
 *** Test Cases ***
 
-Testing Plotter instance
+Should have Plotter instance
     ${instance}=      PlotterInstance   data_plot.png
     ${parameter}=     GetPlotPath       ${instance}
     Should Be Equal    ${parameter}    data_plot.png
 
-Testing returned path from buffer
+Should Return path from buffer
     ${response}=    Plot    ${PLOTINPUT}
     Should Be Equal As Strings    ${response}    ${BUFFERPATHRESPONSE}
 
-Testing returned path from buffer when data is error
+Should return path from buffer when data is error
     ${response}=    Plot    ${PLOTINPUTERROR}
     Should Be Equal As Strings    ${response}    ${BUFFERPATHRESPONSE}
